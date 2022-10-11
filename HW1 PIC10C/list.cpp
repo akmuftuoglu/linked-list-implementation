@@ -16,13 +16,13 @@ using namespace std;
 Node::Node(string s)
 {
     data = s;
-    next = nullptr;
+    next = nullptr;     // initially a node's first and last would point to nullptr
     previous = nullptr;
 }
 
 List::List()
 {
-    first = nullptr;
+    first = nullptr;    // empty list has first and last point to nullptr
     last = nullptr;
 }
 
@@ -57,20 +57,27 @@ void List::push_front(std::string data)
 
 void List::reverse()
 {
-    Iterator iter;
-    iter = this->begin();
+    // cant reverse an empty list
+    if (first == nullptr && last == nullptr)
+    {
+        return;
+    }
     
-    Node* temp = nullptr; // temp of iter.position
+    Iterator iter;
+    iter = this->begin();   // have an iterator point to the beginning
+    
+    Node* temp = nullptr;   // temp of iter.position
                         
-        
+    // iterate until the end
     while (iter.position != nullptr)
     {
         temp = iter.position->previous;
         iter.position->previous = iter.position->next;
         iter.position->next = temp;
-        iter.position = iter.position->previous;
+        iter.position = iter.position->previous;    // follow previous since we switched the next and prev points
     }
     
+    // swap first and last pointers of the node
     temp = first;
     first = last;
     last = temp;
@@ -117,11 +124,19 @@ void List::push_back(std::string data) {
 
 void List::swap(Iterator iter1, Iterator iter2) {
     
+    // cant swap nodes in an empty list
+    if (first == nullptr && last == nullptr)
+    {
+        return;
+    }
+    
+    // dont swap if swapping iterators pointing at the same node
     if (iter1.position == iter2.position)
     {
         return;
     }
     
+    // if you are swapping consecutive nodes and iter1 is before iter2
     if (iter1.position->next == iter2.position)
     {
         Node* leftMost = iter1.position->previous;
@@ -154,6 +169,8 @@ void List::swap(Iterator iter1, Iterator iter2) {
         return;
 
     }
+    
+    // same thing but if iter2 is before iter1
     if (iter2.position->next == iter1.position)
     {
         Node* leftMost = iter2.position->previous;
@@ -201,6 +218,8 @@ void List::swap(Iterator iter1, Iterator iter2) {
     iter1.position->previous = prevTwo;
     iter1.position->next = nextTwo;
     
+    // need to check if the surrounding temp nodes point to nullptr
+    // if so, an error will occur: nullptr cannot have a next or previous pointer
     if (prevOne != nullptr)
     {
         prevOne->next = iter2.position;
@@ -244,7 +263,7 @@ void List::swap(Iterator iter1, Iterator iter2) {
 
 Iterator List::erase(Iterator iter) {
     
-    // if there are no nodes
+    // if there are no nodes = list is empty
     if (iter.position == nullptr)
     {
         return iter;
@@ -282,6 +301,8 @@ Iterator List::erase(Iterator iter) {
         
         return iter;
     }
+    
+    // else its a node in the middle
     
     Node* iter_prev = iter.position->previous;
     Node* iter_next = iter.position->next;
@@ -365,146 +386,8 @@ bool Iterator::equals(Iterator b) const
 
 
 
-
-
-
-
-
-
 int main()
 {
-    List staff;
-    Iterator pos;
-    staff.push_front("Tom");
-    staff.push_front("Jim");
-    staff.push_back("Cam");
-    staff.push_back("Pam");
-    
-    cout << "******* Initial List *******\n" ;
-    for (pos = staff.begin(); !pos.equals(staff.end()); pos.next())
-        cout << pos.get() << "\n";
-
-    // reverse the list
-    cout << "******* Reverse List *******\n" ;
-    staff.reverse();
-    for (pos = staff.begin(); !pos.equals(staff.end()); pos.next())
-        cout << pos.get() << "\n";
-
-    // swap two elements
-    Iterator pos1, pos2;
-    pos1 = staff.begin();
-    pos2 = staff.end();
-    pos1.next();
-    pos2.previous();
-    staff.swap(pos1,pos2);
-    cout << "******* After Swapping *******\n" ;
-    for (pos = staff.begin(); !pos.equals(staff.end()); pos.next())
-        cout << pos.get() << "\n";
-    
-    // erase one element
-    Iterator pos3 = staff.begin();
-    pos3.next();
-    Iterator pos4 = staff.erase(pos3);
-    cout << "******* After Erasing *******\n" ;
-    for (pos = staff.begin(); !pos.equals(staff.end()); pos.next())
-        cout << pos.get() << "\n";
-    cout << "Returned iterator points to: " << pos4.get() << endl;
     return 0;
 } // end of main
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-/*
-int main()
-{
-    List staff;
-    Iterator pos;
-    staff.push_front("Tom");
-    staff.push_front("Jim");
-    staff.push_back("Cam");
-    staff.push_back("Pam");
-    
-    cout << "******* Initial List *******\n" ;
-    for (pos = staff.begin(); !pos.equals(staff.end()); pos.next())
-        cout << pos.get() << "\n";
 
-    // reverse the list
-    cout << "******* Reverse List *******\n" ;
-    staff.reverse();
-    for (pos = staff.begin(); !pos.equals(staff.end()); pos.next())
-        cout << pos.get() << "\n";
-
-    // swap two elements
-    Iterator pos1, pos2;
-    pos1 = staff.begin();
-    pos2 = staff.end();
-    pos1.next();
-    pos2.previous();
-    staff.swap(pos1,pos2);
-    cout << "******* After Swapping *******\n" ;
-    for (pos = staff.begin(); !pos.equals(staff.end()); pos.next())
-        cout << pos.get() << "\n";
-    
-    // erase one element
-    Iterator pos3 = staff.begin();
-    pos3.next();
-    Iterator pos4 = staff.erase(pos3);
-    cout << "******* After Erasing *******\n" ;
-    for (pos = staff.begin(); !pos.equals(staff.end()); pos.next())
-        cout << pos.get() << "\n";
-    cout << "Returned iterator points to: " << pos4.get() << endl;
-    return 0;
-}
-*/

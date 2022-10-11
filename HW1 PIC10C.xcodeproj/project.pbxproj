@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F108D5528ED0456008D957A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F108D5428ED0456008D957A /* main.cpp */; };
+		4F108D5528ED0456008D957A /* list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F108D5428ED0456008D957A /* list.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +24,8 @@
 
 /* Begin PBXFileReference section */
 		4F108D5128ED0456008D957A /* HW1 PIC10C */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "HW1 PIC10C"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F108D5428ED0456008D957A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		4F108D5428ED0456008D957A /* list.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = list.cpp; sourceTree = "<group>"; };
+		4F108D5B28ED047B008D957A /* list.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = list.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +58,8 @@
 		4F108D5328ED0456008D957A /* HW1 PIC10C */ = {
 			isa = PBXGroup;
 			children = (
-				4F108D5428ED0456008D957A /* main.cpp */,
+				4F108D5428ED0456008D957A /* list.cpp */,
+				4F108D5B28ED047B008D957A /* list.h */,
 			);
 			path = "HW1 PIC10C";
 			sourceTree = "<group>";
@@ -119,7 +121,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F108D5528ED0456008D957A /* main.cpp in Sources */,
+				4F108D5528ED0456008D957A /* list.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
